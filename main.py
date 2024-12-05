@@ -9,19 +9,17 @@ class MathGamblingSimulator:
 
     def generate_quadratic_equation(self):
         """Generate a quadratic equation with whole number solutions."""
-        # Ensure integer solutions
         x1 = random.randint(-10, 10)
         x2 = random.randint(-10, 10)
 
-        # Use the integer solutions to construct the equation
-        a = random.randint(1, 3)  # Coefficient of x²
-        b = -a * (x1 + x2)  # Sum of roots
-        c = a * x1 * x2  # Product of roots
+        a = random.randint(1, 3)
+        b = -a * (x1 + x2)
+        c = a * x1 * x2
 
         return {
             'equation': f"{a}x² + {b}x + {c} = 0", 
             'solutions': [x1, x2],
-            'reward': abs(a + b + c) * 10  # Reward based on equation complexity
+            'reward': abs(a + b + c) * 10
         }
 
     def solve_math_challenge(self):
@@ -120,8 +118,10 @@ class MathGamblingSimulator:
 
             if win:
                 winnings = bet_amount * multiplier
+                # Subtract original bet before adding winnings
+                self.balance -= bet_amount
                 self.balance += winnings
-                print(f"🎉 You won ${winnings}!")
+                print(f"🎉 You won ${winnings - bet_amount}!")
             else:
                 self.balance -= bet_amount
                 print(f"😞 You lost ${bet_amount}")
@@ -151,14 +151,21 @@ class MathGamblingSimulator:
 
             # Check winning combinations
             if len(set(result)) == 1:
+                # Jackpot
                 winnings = bet_amount * 10
-                print(f"🎉 JACKPOT! You won ${winnings}")
+                # Subtract original bet before adding winnings
+                self.balance -= bet_amount
                 self.balance += winnings
+                print(f"🎉 JACKPOT! You won ${winnings - bet_amount}")
             elif len(set(result)) == 2:
+                # Two matching symbols
                 winnings = bet_amount * 3
-                print(f"🌟 Two matching symbols! You won ${winnings}")
+                # Subtract original bet before adding winnings
+                self.balance -= bet_amount
                 self.balance += winnings
+                print(f"🌟 Two matching symbols! You won ${winnings - bet_amount}")
             else:
+                # No match
                 self.balance -= bet_amount
                 print(f"😞 No match. You lost ${bet_amount}")
 
