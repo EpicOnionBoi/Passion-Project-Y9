@@ -1,2 +1,3 @@
 # Passion-Project-Y9
-Gambling (not good)
+Solve quadratic equations to earn money.
+Then you can gamble it on roulette or slot machine.
